@@ -9,7 +9,7 @@ pipeline:
       - DOCKER_LAUNCH_DEBUG=true
     debug: true
     commands:
-      - echo 'clone success'
+      - echo 'clone success2'
     volumes:
       - /data/apps/opt/web-im:/data/apps/opt/web-im
     when:
