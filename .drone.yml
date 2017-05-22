@@ -1,0 +1,20 @@
+workspace:
+  base: /data/apps/opt
+  path: web-im
+
+pipeline:
+  clone:
+    image: plugins/git
+    environment:
+      - DOCKER_LAUNCH_DEBUG=true
+    debug: true
+    commands:
+      - echo 'clone success'
+    volumes:
+      - /data/apps/opt/web-im:/data/apps/opt/web-im
+    when:
+      branch: drone
+
+
+
+
