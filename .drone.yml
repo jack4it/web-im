@@ -2,19 +2,20 @@ workspace:
   base: /data/apps/opt
   path: web-im
 
-pipeline:
-  clone:
+
+clone:
     image: plugins/git
     environment:
       - DOCKER_LAUNCH_DEBUG=true
     debug: true
     commands:
-      - echo 'clone success2'
+      - echo 'clone success'
     volumes:
       - /data/apps/opt/web-im/${DRONE_BRANCH}:/data/apps/opt/web-im
     when:
       branch: drone
 
+pipeline:
   build:
     image: node:7.8
     privileged: true
