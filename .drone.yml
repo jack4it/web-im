@@ -2,25 +2,47 @@ workspace:
   base: /data/apps/opt
   path: web-im
 
-clone:
-  git:
-    image: plugins/git
-    volumes:
-      - /data/apps/opt/web-im/${DRONE_BRANCH}:/data/apps/opt/web-im
-
 
 pipeline:
+
+  restore-cache:
+    image: drillster/drone-volume-cache
+    restore: true
+    mount:
+      - ./
+    volumes:
+      - /data/apps/opt/web-im/${DRONE_BRANCH}:/cache
+
   build:
     image: node:7.8
     privileged: true
     commands:
       - npm run build
       - echo 'build success'
-    environment:
-      - DRONE_REPO_PRIVATE=true
-    volumes:
-      - /data/apps/opt/web-im/${DRONE_BRANCH}:/data/apps/opt/web-im
     when:
       branch: [dev, wenke, lwz, yiletian, zhongzf, master, release, drone]
 
-
+  rebuild-cache:
+    image: drillster/drone-volume-cache
+    rebuild: true
+    mount:
+      - ./
+    volumes:
+      - /data/apps/opt/web-im/${DRONE_BRANCH}:/cache
+#
+#  dockerize-sandbox:
+#    image: plugins/docker
+#    environment:
+#      - DOCKER_LAUNCH_DEBUG=true
+#    debug: true
+#    repo: docker-registry-cn.easemob.com/kubernetes/im/eva-web
+#    tags: latest
+#    registry: https://docker-registry-cn.easemob.com
+#    username: easemob
+#    password: thepushbox
+#    dockerfile: image/docker/eva-web/Dockerfile
+#    context: image/docker/eva-web/
+#    volumes:
+#          - /data/apps/opt/eva:/data/apps/opt/eva
+#    when:
+#      branch: drone
