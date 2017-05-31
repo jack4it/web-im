@@ -37,6 +37,7 @@
     "webpack-dev-server": "^1.16.2"
   },
   "scripts": {
+    "build": "npm install && ./node_modules/.bin/webpack --config webpack.config.js --progress --colors",
     "test": "gulp test",
     "start": "node server.js",
     "dev": "cross-env NODE_ENV=develop node build/dev-server.js",

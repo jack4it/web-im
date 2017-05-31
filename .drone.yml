@@ -19,9 +19,7 @@ pipeline:
     image: node:7.8
     privileged: true
     commands:
-      - echo 'webpack begin...'
-      - webpack
-      - echo 'webpack done!'
+      - npm run build
       - echo 'build success'
     volumes:
       - /data/apps/opt/web-im/${DRONE_BRANCH}:/data/apps/opt/web-im
