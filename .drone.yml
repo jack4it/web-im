@@ -1,16 +1,5 @@
 
 
-
-clone:
-  git:
-    image: plugins/git
-    depth: 50
-    commands:
-      - echo 'clone success'
-      - echo ${DRONE_REPO_PRIVATE}
-    when:
-      branch: drone
-
 pipeline:
   build:
     image: node:7.8
