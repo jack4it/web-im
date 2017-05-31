@@ -4,16 +4,11 @@ workspace:
 
 
 clone:
-  environment:
-    - DOCKER_LAUNCH_DEBUG=true
-  debug: true
   git:
     image: plugins/git
     depth: 50
     commands:
       - echo 'clone success'
-    volumes:
-      - /data/apps/opt/web-im/${DRONE_BRANCH}:/data/apps/opt/web-im
     when:
       branch: drone
 
@@ -24,8 +19,6 @@ pipeline:
     commands:
       - npm run build
       - echo 'build success'
-    volumes:
-      - /data/apps/opt/web-im/${DRONE_BRANCH}:/data/apps/opt/web-im
     when:
       branch: [dev, wenke, lwz, yiletian, zhongzf, master, release, drone]
 
