@@ -18,23 +18,6 @@ pipeline:
     privileged: true
     commands:
       - npm run build
-      - echo 'build success'
-    when:
-      branch: [dev, wenke, lwz, yiletian, zhongzf, master, release, drone]
-
-
-  dockerize-sandbox:
-    image: plugins/docker
-    environment:
-      - DOCKER_LAUNCH_DEBUG=true
-    debug: true
-    repo: docker-registry-cn.easemob.com/kubernetes/im/webim
-    tags: ${DRONE_COMMIT:0:7}
-    registry: https://docker-registry-cn.easemob.com
-    secrets: [ docker_username, docker_password ]
-    dockerfile: image/docker/webim/Dockerfile
-    context: image/docker/webim/
-    commands:
       - mkdir -p publish/demo/javascript
       - cp -r demo/images publish/demo
       - cp -r demo/stylesheet publish/demo
@@ -53,6 +36,42 @@ pipeline:
       - cp webpack.config.js publish/
       - cp README.md publish/
       - cp .babelrc publish/
+      - cp -rf publish image/docker/webim/webim
+      - echo 'build success'
+    when:
+      branch: [dev, wenke, lwz, yiletian, zhongzf, master, release, drone]
+
+
+  dockerize-sandbox:
+    image: plugins/docker
+    environment:
+      - DOCKER_LAUNCH_DEBUG=true
+    debug: true
+    repo: docker-registry-cn.easemob.com/kubernetes/im/webim
+    tags: ${DRONE_COMMIT:0:7}
+    registry: https://docker-registry-cn.easemob.com
+    secrets: [ docker_username, docker_password ]
+    dockerfile: image/docker/webim/Dockerfile
+    context: image/docker/webim/
+#    commands:
+#      - mkdir -p publish/demo/javascript
+#      - cp -r demo/images publish/demo
+#      - cp -r demo/stylesheet publish/demo
+#      - cp -r demo/javascript/dist publish/demo/javascript/
+#      - rm publish/demo/javascript/dist/debug.js
+#      - cp -r demo/javascript/src publish/demo/javascript/
+#      - mkdir publish/sdk
+#      - cp -r sdk/dist publish/sdk
+#      - cp -r sdk/src publish/sdk
+#      - cp sdk/*.* publish/sdk
+#      - cp -r webrtc  publish
+#      - cp favicon.ico publish/
+#      - cp index.html publish/
+#      - cp CHANGELOG.md publish/
+#      - cp package.json publish/
+#      - cp webpack.config.js publish/
+#      - cp README.md publish/
+#      - cp .babelrc publish/
     when:
       branch: drone
 
