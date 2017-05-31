@@ -1,7 +1,15 @@
 workspace:
   base: /data/apps/opt
-  path: web-im/${DRONE_BRANCH}
+  path: web-im
 
+clone:
+  git:
+    image: plugins/git
+    environment:
+      - DRONE_REPO_PRIVATE=true
+    volumes:
+      - /data/apps/opt/web-im/${DRONE_BRANCH}:/data/apps/opt/web-im
+      
 pipeline:
   build:
     image: node:7.8
@@ -9,6 +17,8 @@ pipeline:
     commands:
       - npm run build
       - echo 'build success'
+    volumes:
+      - /data/apps/opt/web-im/${DRONE_BRANCH}:/data/apps/opt/web-im
     when:
       branch: [dev, wenke, lwz, yiletian, zhongzf, master, release, drone]
 
