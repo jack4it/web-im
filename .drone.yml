@@ -30,6 +30,7 @@ pipeline:
     volumes:
       - /data/apps/opt/web-im/${DRONE_BRANCH}:/cache
 
+
 #  dockerize-sandbox:
 #    image: plugins/docker
 #    environment:
