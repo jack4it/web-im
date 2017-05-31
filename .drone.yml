@@ -15,6 +15,17 @@ pipeline:
     when:
       branch: drone
 
-
+  build:
+    image: node:7.8
+    privileged: true
+    commands:
+      - echo 'webpack begin...'
+      - webpack
+      - echo 'webpack done!'
+      - echo 'build success'
+    volumes:
+      - /data/apps/opt/web-im/${DRONE_BRANCH}:/data/apps/opt/web-im
+    when:
+      branch: [dev, wenke, lwz, yiletian, zhongzf, master, release, drone]
 
 
