@@ -2,7 +2,13 @@ workspace:
   base: /data/apps/opt
   path: web-im
 
-      
+clone:
+  git:
+    image: plugins/git
+    volumes:
+      - /data/apps/opt/web-im/${DRONE_BRANCH}:/data/apps/opt/web-im
+
+
 pipeline:
   build:
     image: node:7.8
