@@ -7,15 +7,15 @@ clone:
   git:
     image: plugins/git
     depth: 50
-    environment:
-      - DOCKER_LAUNCH_DEBUG=true
-    debug: true
-    commands:
-      - echo 'clone success'
-    volumes:
-      - /data/apps/opt/web-im/${DRONE_BRANCH}:/data/apps/opt/web-im
-    when:
-      branch: drone
+  environment:
+    - DOCKER_LAUNCH_DEBUG=true
+  debug: true
+  commands:
+    - echo 'clone success'
+  volumes:
+    - /data/apps/opt/web-im/${DRONE_BRANCH}:/data/apps/opt/web-im
+  when:
+    branch: drone
 
 pipeline:
   build:
