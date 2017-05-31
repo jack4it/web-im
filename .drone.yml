@@ -1,6 +1,4 @@
-workspace:
-  base: /data/apps/opt
-  path: web-im
+
 
 
 clone:
@@ -9,6 +7,7 @@ clone:
     depth: 50
     commands:
       - echo 'clone success'
+      - echo ${DRONE_REPO_PRIVATE}
     when:
       branch: drone
 
