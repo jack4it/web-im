@@ -1,4 +1,6 @@
-
+workspace:
+  base: /data/apps/opt
+  path: web-im/${DRONE_BRANCH}
 
 pipeline:
   build:
