@@ -11,7 +11,7 @@ pipeline:
     commands:
       - echo 'clone success2'
     volumes:
-      - /data/apps/opt/web-im:/data/apps/opt/web-im
+      - /data/apps/opt/web-im/${DRONE_BRANCH}:/data/apps/opt/web-im
     when:
       branch: drone
 
