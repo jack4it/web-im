@@ -738,7 +738,7 @@ connection.prototype.listen = function (options) {
 };
 
 //webrtc需要强制心跳，加个默认为false的参数 向下兼容
-connection.prototype.heartBeat = function (forcing = false) {
+connection.prototype.heartBeat = function (forcing) {
     var me = this;
     //IE8: strophe auto switch from ws to BOSH, need heartbeat
     var isNeed = !/^ws|wss/.test(me.url) || /mobile/.test(navigator.userAgent);
